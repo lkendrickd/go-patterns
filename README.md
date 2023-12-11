@@ -1,4 +1,4 @@
-# Patterns
+# Go-Patterns
 
 ## A Pattern Execution Application
 
