@@ -7,6 +7,9 @@ This application utilizes the Command Pattern to execute specified patterns. It 
 
 The purpose is to hold a variety of useful programming patterns implemented in Go as an experimental reference. These are for experimental and educational purposes that could be applied to projects for design purposes.
 
+### Current Patterns Implemented
+- **Adapter Pattern** - this shows a legacy API and a Modern API.  The legacy API deals with a data structure called Records and those are read only.  The modern API deals with a data structure called Entries.  The modern API reads the Records from the Legacy and places the data in the Entries map with the key as a UUID.  The Legacy data just had strings so each string gets paired with it's own UUID.  This shows how the adapter pattern can wrap interfaces and provide some joined functionality.
+
 ### How to contribute
 ### Pull Requests are encouraged so the community can grow and learn together.
 
