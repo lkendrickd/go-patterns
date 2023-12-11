@@ -7,6 +7,7 @@ import (
 	"os"
 
 	"github.com/lkendrickd/patterns/internal/patterner"
+	"github.com/lkendrickd/patterns/internal/patterns/adapter"
 )
 
 // Developer Notes:  This uses the pattern operator to run a specified pattern
@@ -56,6 +57,12 @@ func main() {
 		},
 	))
 
+	// Add the adapter pattern to the PatternOperator
+	patternOperator.AddPattern(patterner.NewPattern(
+		"adapter",
+		adapterExecutor,
+	))
+
 	// Run the pattern
 	if err := patternOperator.RunPattern(*fPattern); err != nil {
 		// log the error and exit with an exit code of 1 so this can be checked
@@ -67,6 +74,37 @@ func main() {
 	// Remove the pattern
 	patternOperator.RemovePattern(*fPattern)
 }
+
+/*##################################################################################
+# Pattern Functions
+##################################################################################*/
+
+// adapterExecutor is the pattern function for the adapter pattern
+func adapterExecutor() error {
+	// Create a legacy read only API representing a legacy API
+	legacyAPI := adapter.NewRecordsAPI()
+	// Create a modern read/write API that represents a modern API
+	// it will convert the records from the legacy API to the modern API
+	// it stores the old Records in a new format called Entries
+	modernAPI := adapter.NewEntriesAPI()
+
+	// Create a new adapter to wrapper both the legacy and modern APIs
+	adapter := adapter.NewAdapter(legacyAPI, modernAPI)
+
+	// Convert the records from the legacy API to the modern API
+	if err := adapter.ConvertRecords(); err != nil {
+		return err
+	}
+
+	// List the entries from the modern API
+	fmt.Println(adapter.ListEntries())
+
+	return nil
+}
+
+/*##################################################################################
+# Helper Functions
+##################################################################################*/
 
 // getEnv is a helper function to retrieve the environment variable for the pattern if the environment variable exists
 // is not empty then this will override the flag value
