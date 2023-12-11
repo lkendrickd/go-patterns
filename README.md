@@ -7,6 +7,15 @@ This application utilizes the Command Pattern to execute specified patterns. It 
 
 The purpose is to hold a variety of useful programming patterns implemented in Go as an experimental reference. These are for experimental and educational purposes that could be applied to projects for design purposes.
 
+### How to contribute
+### Pull Requests are encouraged so the community can grow and learn together.
+
+To contibute patterns of interest open an issue against the repo and submit your
+proposal of a pattern that would be of use to this project.
+
+Once the discussion is to proceed create a fork and do the changes and create a pull request.  Thank you.
+
+
 ### Usage
 To run a specific pattern, use the `-pattern` flag followed by the pattern name. For example:
 
