@@ -6,7 +6,7 @@ import (
 	"log/slog"
 	"os"
 
-	"github.com/lkendrickd/patterns/internal/patterner"
+	"github.com/lkendrickd/patterns/internal/pattern"
 	"github.com/lkendrickd/patterns/internal/patterns/adapter"
 )
 
@@ -46,10 +46,10 @@ func main() {
 	}
 
 	// Create a new PatternOperator
-	patternOperator := patterner.NewPatternOperator([]string{"foo"}, logger)
+	patternOperator := pattern.NewPatternOperator([]string{"foo"}, logger)
 	// Add a new pattern to the PatternOperator this adds a default pattern called foo
 	// so the application can be called.
-	patternOperator.AddPattern(patterner.NewPattern(
+	patternOperator.AddPattern(pattern.NewPattern(
 		"foo",
 		func() error {
 			fmt.Println("foo")
@@ -58,13 +58,13 @@ func main() {
 	))
 
 	// Add the adapter pattern to the PatternOperator
-	patternOperator.AddPattern(patterner.NewPattern(
+	patternOperator.AddPattern(pattern.NewPattern(
 		"adapter",
 		adapterExecutor,
 	))
 
 	// Run the pattern
-	if err := patternOperator.RunPattern(*fPattern); err != nil {
+	if err := patternOperator.Run(*fPattern); err != nil {
 		// log the error and exit with an exit code of 1 so this can be checked
 		// such as in a ci/cd pipeline or a bash script evocation.
 		logger.Error(err.Error())
