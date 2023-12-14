@@ -8,6 +8,7 @@ import (
 
 	"github.com/lkendrickd/patterns/internal/pattern"
 	"github.com/lkendrickd/patterns/internal/patterns/adapter"
+	"github.com/lkendrickd/patterns/internal/patterns/singleton"
 )
 
 // Developer Notes:  This uses the pattern operator to run a specified pattern
@@ -63,6 +64,12 @@ func main() {
 		adapterExecutor,
 	))
 
+	// Add the singleton pattern to the PatternOperator
+	patternOperator.AddPattern(pattern.NewPattern(
+		"singleton",
+		singletonExecutor,
+	))
+
 	// Run the pattern
 	if err := patternOperator.Run(*fPattern); err != nil {
 		// log the error and exit with an exit code of 1 so this can be checked
@@ -98,6 +105,27 @@ func adapterExecutor() error {
 
 	// List the entries from the modern API
 	fmt.Println(adapter.ListEntries())
+
+	return nil
+}
+
+// singletonExecutor is the pattern function for the singleton pattern
+func singletonExecutor() error {
+	fmt.Println("creating the singleton calling constructor")
+
+	// Create a new singleton
+	chanOpAlpha := singleton.New()
+
+	// Print the singleton ID
+	fmt.Printf("singleton ID: %s\n", chanOpAlpha.ID)
+
+	fmt.Println("calling the singleton constructor again")
+
+	// Call the constructor again using a new variable
+	chanOpBravo := singleton.New()
+
+	// Print the singleton ID
+	fmt.Printf("singleton ID: %s\n", chanOpBravo.ID)
 
 	return nil
 }
