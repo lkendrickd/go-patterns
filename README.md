@@ -10,6 +10,8 @@ The purpose is to hold a variety of useful programming patterns implemented in G
 ### Current Patterns Implemented
 - **Adapter Pattern** - this shows a legacy API and a Modern API.  The legacy API deals with a data structure called Records and those are read only.  The modern API deals with a data structure called Entries.  The modern API reads the Records from the Legacy and places the data in the Entries map with the key as a UUID.  The Legacy data just had strings so each string gets paired with it's own UUID.  This shows how the adapter pattern can wrap interfaces and provide some joined functionality.
 
+- **Singleton** - this shows a simple singleton pattern. The struct is an arbitrary type called ChannelOperator. The logic for it is not implemented as to not detract from the actual pattern. The secret is in the constructor using the standard library sync package and sync.Once. There is also a uuid assigned to the struct id to show uniqueness. Using the id it showcases that this unique id will not change even if the constructor is called again ensuring only one instance of the ChannelOperator exists.
+
 ### How to contribute
 ### Pull Requests are encouraged so the community can grow and learn together.
 
